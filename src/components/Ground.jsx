@@ -19,7 +19,7 @@ const Ground = () => {
         x={skyAndGroundWidth / -2}
         y = {0}
         width={skyAndGroundWidth}
-        height={0}
+        height={100}
       />
       <line
         x1 = {skyAndGroundWidth / -2}
