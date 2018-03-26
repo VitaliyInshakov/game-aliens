@@ -8,6 +8,7 @@ import Cannonball from './Cannonball';
 import CurrentScore from './CurrentScore';
 import FlyingObject from './FlyingObject';
 import Heart from './Heart';
+import StartGame from './StartGame';
 
 const Canvas = (props) => {
   const viewBox = [window.innerWidth / -2, 100 - window.innerHeight, window.innerWidth, window.innerHeight];
@@ -33,6 +34,7 @@ const Canvas = (props) => {
       <FlyingObject position={{x: -150, y: -300}} />
       <FlyingObject position={{x: 150, y: -300}} />
       <Heart position={{x: -300, y: 35}} />
+      <StartGame onClick={() => console.log('Aliens, Go Home!')} />
     </svg>
   )
 }
