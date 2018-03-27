@@ -4,10 +4,8 @@ import Sky from './Sky';
 import Ground from './Ground';
 import CannonBase from './CannonBase';
 import CannonPipe from './CannonPipe';
-import Cannonball from './Cannonball';
 import CurrentScore from './CurrentScore';
 import FlyingObject from './FlyingObject';
-import Heart from './Heart';
 import StartGame from './StartGame';
 import Title from './Title';
 
@@ -31,20 +29,32 @@ const Canvas = (props) => {
       <Ground />
       <CannonPipe rotation={props.angle} />
       <CannonBase />
-      <Cannonball position={{x: 0, y: -100}} />
       <CurrentScore score={15}/>
-      <FlyingObject position={{x: -150, y: -300}} />
-      <FlyingObject position={{x: 150, y: -300}} />
-      <Heart position={{x: -300, y: 35}} />
-      <StartGame onClick={() => console.log('Aliens, Go Home!')} />
-      <Title />
+      { !props.gameState.started &&
+        <g>
+          <StartGame onClick={() => props.startGame()} />
+          <Title />
+        </g>
+      }
+      { props.gameState.started && 
+        <g>
+          <FlyingObject position={{x: -150, y: -300}} />
+          <FlyingObject position={{x: 150, y: -300}} />
+        </g>
+      }
     </svg>
   )
 }
 
 Canvas.propTypes = {
   angle: PropTypes.number.isRequired,
-  trackMouse: PropTypes.func.isRequired
+  gameState: PropTypes.shape({
+    started: PropTypes.bool.isRequired,
+    kills: PropTypes.number.isRequired,
+    lives: PropTypes.number.isRequired
+  }).isRequired,
+  trackMouse: PropTypes.func.isRequired,
+  startGame: PropTypes.func.isRequired
 }
 
 export default Canvas;
