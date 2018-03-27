@@ -15,7 +15,7 @@ const initialState = {
   gameState: intialGameState
 }
 
-export default function reducer(state = intialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case MOVE_OBJECTS:
       return moveObjects(state, action);
