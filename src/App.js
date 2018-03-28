@@ -2,10 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getCanvasPosition } from './utils/formula';
 import Canvas from './components/Canvas';
+import * as Auth0 from 'auth0-web';
+
+Auth0.configure({
+  domain: 'game-alien.auth0.com',
+  clientID: 'nedSUMZgdvx8WS12ih7Z4xqApU338Onj',
+  redirectUri: 'http://localhost:3000/',
+  responseType: 'token id_token',
+  scope: 'openid profile manage:points'
+});
 
 class App extends Component {
   componentDidMount() {
     const self = this;
+
+    Auth0.handleAuthCallback();
+    Auth0.subscribe((auth) => {
+      console.log(auth);
+    });
+    
     setInterval(() => {
       self.props.moveObjects(self.canvasMousePosition);
     }, 10);
