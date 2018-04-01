@@ -26,9 +26,9 @@ export default function moveObjects(state, action) {
 
   const started = lives > 0;
   if(!started) {
-    flyingObjects = [],
-    cannonBalls = [],
-    lives = 3
+    flyingObjects = [];
+    cannonBalls = [];
+    lives = 3;
   }
 
   const { x, y } = mousePosition;
