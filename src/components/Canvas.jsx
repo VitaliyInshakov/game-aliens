@@ -9,6 +9,7 @@ import FlyingObject from './FlyingObject';
 import StartGame from './StartGame';
 import Title from './Title';
 import Leaderboard from './Leaderboard';
+import Cannonball from './Cannonball';
 import { signIn } from 'auth0-web';
 
 const Canvas = (props) => {
@@ -21,6 +22,7 @@ const Canvas = (props) => {
       preserveAspectRatio="xMaxYMax none"
       onMouseMove={props.trackMouse}
       viewBox={viewBox}
+      onClick={props.shoot}
     >
       <defs>
         <filter id="shadow">
@@ -29,6 +31,12 @@ const Canvas = (props) => {
       </defs>
       <Sky />
       <Ground />
+      {props.gameState.cannonBalls.map(cannonBall => (
+        <Cannonball
+          key={cannonBall.id}
+          position={cannonBall.position}
+        />
+      ))}
       <CannonPipe rotation={props.angle} />
       <CannonBase />
       <CurrentScore score={15}/>
@@ -77,7 +85,8 @@ Canvas.propTypes = {
     maxScore: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
-  }))
+  })),
+  shoot: PropTypes.func.isRequired
 }
 
 Canvas.defaultProps = {
